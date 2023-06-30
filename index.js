@@ -11,7 +11,7 @@ function pingForPlayers() {
 		if(res.data && res.data.players) {
 			let playerCount = res.data.players.online || 0 // Default to zero
 			let guild = client.guilds.get(`${process.env.GUILD_ID}`) // Gets the guild ID
-			let channel = guild.channel.get(`${process.env.CHANNEL_ID}`) // Gets the channel ID
+			let channel = guild.channels.get(`${process.env.CHANNEL_ID}`) // Gets the channel ID
 			channel.setName(`minecraft (${playerCount} player${playerCount > 1 ? 's' : ''})`) // Sets the channel name with the player count
 			client.user.setPresence({
 				game: {
