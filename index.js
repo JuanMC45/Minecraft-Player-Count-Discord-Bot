@@ -10,13 +10,9 @@ function pingForPlayers() {
 		// If we got a valid response
 		if(res.data && res.data.players) {
 			let playerCount = res.data.players.online || 0 // Default to zero
-			client.user.setPresence({
-				game: {
-					// Example: "Watching 5 players on server.com"
-					name: `${playerCount} player${playerCount > 1 ? 's' : ''} on ${process.env.MC_SERVER_IP}`,
-					type: 3 // Use activity type 3 which is "Watching"
-				}
-			})
+			let guild = client.guilds.get(`${process.env.GUILD_ID}`) // Gets the guild ID
+			let channel = guild.channel.get(`${process.env.CHANNEL_ID}`) // Gets the channel ID
+			channel.setName('minecraft ('+playerCount+' players)')
 			console.log('Updated player count to', playerCount)
 		}
 		else
